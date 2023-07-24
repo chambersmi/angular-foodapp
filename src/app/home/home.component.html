@@ -1,6 +1,12 @@
+<app-search></app-search>
+<app-tags></app-tags>
+<app-not-found [visible]="!foods || foods.length <=0"
+notFoundMessage="Your search came up empty 😞" resetLinkText="Try searching again!"></app-not-found>
+
 <ul>
   <li *ngFor="let food of foods">
-    <a><img src="{{food.imageUrl}}" alt="Image of food"></a>
+    <a routerLink="/food/{{food.id}}">
+      <img src="{{food.imageUrl}}" alt="Image of food">
     <div class="content">
       <div class="name">
         {{food.name}}
@@ -8,7 +14,18 @@
       <span class="favorite {{food.favorite? '' : 'not'}}">
         ♥
       </span>
-
+        <div class="product-item-footer">
+          <div class="origins">
+            <span *ngFor="let origin of food.origins">{{origin}}</span>
+          </div>
+          <div class="cook-time">
+            <span>🕐{{food.cookTime}}</span>
+          </div>
+        </div>
+        <div class="price">
+          <span>{{food.price | currency}}</span>
+        </div>
       </div>
+    </a>
   </li>
 </ul>
